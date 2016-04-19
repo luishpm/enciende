@@ -47,5 +47,5 @@ dependencies {
 
 war{
  archiveName = 'ROOT.war'
- destinationDir = file('webapps')
+ destinationDir = file('../../webapps')
 }
