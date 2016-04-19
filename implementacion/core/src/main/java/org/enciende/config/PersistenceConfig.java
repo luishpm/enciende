@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -102,12 +103,22 @@ public class PersistenceConfig
 //        dsLookup.setResourceRef(true);
 //        DataSource dataSource = dsLookup.getDataSource(env.getProperty("jdbc.cablePortalDS.jndi"));
 //        return dataSource;
-    	BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-		dataSource.setUrl(env.getProperty("jdbc.url"));
-		dataSource.setUsername(env.getProperty("jdbc.username"));
-		dataSource.setPassword(env.getProperty("jdbc.password"));
-		return dataSource;
+    	if(StringUtils.isNotBlank(System.getenv("OPENSHIFT_MYSQL_DB_HOST"))){
+    		BasicDataSource dataSource = new BasicDataSource();
+    		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+    		dataSource.setUrl("jdbc:mysql://"+System.getenv("OPENSHIFT_MYSQL_DB_HOST")+":"+System.getenv("OPENSHIFT_MYSQL_DB_PORT")+"/app");
+    		dataSource.setUsername(System.getenv("OPENSHIFT_MYSQL_DB_USERNAME"));
+    		dataSource.setPassword(System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD"));
+    		return dataSource;
+    	}else{
+    		BasicDataSource dataSource = new BasicDataSource();
+    		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+    		dataSource.setUrl(env.getProperty("jdbc.url"));
+    		dataSource.setUsername(env.getProperty("jdbc.username"));
+    		dataSource.setPassword(env.getProperty("jdbc.password"));
+    		return dataSource;
+    	}
+    	
     }
     
 }
