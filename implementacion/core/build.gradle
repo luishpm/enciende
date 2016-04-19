@@ -9,6 +9,14 @@ configurations {
 
 }
 
+configurations.all {
+	resolutionStrategy{
+		force 'org.javassist:javassist:3.17.1-GA'
+		forcedModules = ['org.javassist:javassist:3.17.1-GA']
+	}
+}
+
+
 apply plugin: 'maven'
 
 uploadResultArchives {
@@ -80,11 +88,11 @@ dependencies {
 	compile group: 'org.springframework', name:  'spring-expression', version: '4.2.5.RELEASE'
 	compile group: 'org.springframework', name:  'spring-beans', version: '4.2.5.RELEASE'
 	compile group: 'org.springframework', name: 'spring-web', version: '4.2.5.RELEASE'
-  compile 'org.springframework.data:spring-data-jpa:1.11.0.BUILD-SNAPSHOT'
+  	compile 'org.springframework.data:spring-data-jpa:1.11.0.BUILD-SNAPSHOT'
 	compile 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
 	compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
-  compile 'org.apache.logging.log4j:log4j-core:2.5'
-  compile 'org.apache.logging.log4j:log4j-api:2.5'
+  	compile 'org.apache.logging.log4j:log4j-core:2.5'
+  	compile 'org.apache.logging.log4j:log4j-api:2.5'
 	compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.5'
 	compile 'org.apache.httpcomponents:httpclient:4.5.2'
 	compile 'javax.mail:mail:1.4'
@@ -95,6 +103,7 @@ dependencies {
 	compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
 	compile 'org.codehaus.jackson:jackson-mapper-asl:1.8.5'
 	compile 'com.google.code.gson:gson:2.5'
+	compile 'org.javassist:javassist:3.17.1-GA'
 
 
 	compile 'commons-digester:commons-digester:2.1'
