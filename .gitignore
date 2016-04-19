@@ -1,0 +1,6 @@
+/build/
+.fuse_hidden*
+**/.DS_Store
+.classpath
+.gradle
+.settings

@@ -1,0 +1,36 @@
+subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+
+	tasks.withType(JavaCompile) {
+    	options.encoding = 'UTF-8'
+	}
+
+
+    repositories {
+       mavenCentral()
+       maven { url 'http://download.java.net/maven/1' }
+       maven { url 'http://download.java.net/maven/2' }
+       maven { url 'https://repo.spring.io/libs-snapshot'}
+	   maven { url 'http://repo.spring.io/milestone' }
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+		    testCompile 'org.springframework:spring-test:4.2.5.RELEASE'
+    }
+
+    version = '0.1'
+
+    jar {
+        manifest.attributes provider: 'Enciende'
+    }
+
+	test {
+		testLogging {
+		  // Show that tests are run in the command-line output
+		  events 'started', 'passed'
+		}
+	}
+}
