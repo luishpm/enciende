@@ -14,6 +14,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Grupo.findAll", query="SELECT g FROM Grupo g")
+@Table(name="GRUPO")
 public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 

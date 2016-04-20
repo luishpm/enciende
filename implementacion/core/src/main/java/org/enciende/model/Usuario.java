@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+@Table(name="USUARIO")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -15,6 +15,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Rally.findAll", query="SELECT r FROM Rally r")
+@Table(name="RALLY")
 public class Rally implements Serializable {
 	private static final long serialVersionUID = 1L;
 

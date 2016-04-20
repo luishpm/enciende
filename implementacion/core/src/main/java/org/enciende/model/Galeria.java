@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Galeria.findAll", query="SELECT g FROM Galeria g")
+@Table(name="GALERIA")
 public class Galeria implements Serializable {
 	private static final long serialVersionUID = 1L;
 
