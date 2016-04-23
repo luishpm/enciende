@@ -2,6 +2,7 @@ package org.enciende.persistence.repository;
 
 import java.util.List;
 
+import org.enciende.model.Actividad;
 import org.enciende.model.Grupo;
 import org.enciende.model.GrupoUsuarioPK;
 import org.enciende.model.Rally;
@@ -26,5 +27,8 @@ public interface RallyRepository extends PagingAndSortingRepository<Rally, Integ
 	@Modifying
 	@Query("delete from GrupoUsuario g where g.id = ?1")
 	public void deleteGrupoUsuario(GrupoUsuarioPK id);
+	
+	@Query("select ag.actividad from ActividadGrupo ag where ag.id.idGrupo =  ?1 order by ag.orden")
+	public List<Actividad> findActividadesByIdGrupo(Integer idGrupo);
 
 }

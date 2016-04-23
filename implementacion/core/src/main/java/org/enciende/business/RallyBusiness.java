@@ -2,6 +2,7 @@ package org.enciende.business;
 
 import java.util.List;
 
+import org.enciende.model.Actividad;
 import org.enciende.model.Grupo;
 import org.enciende.model.GrupoUsuario;
 import org.enciende.model.Rally;
@@ -15,4 +16,6 @@ public interface RallyBusiness {
 	public Grupo saveGrupo(Grupo grupo);
 
 	public GrupoUsuario inscribir(Usuario usuario);
+
+	public List<Actividad> findActividadesByIdGrupo(Integer grupoId);
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.enciende.business.RallyBusiness;
 import org.enciende.exception.BusinessException;
+import org.enciende.model.Actividad;
 import org.enciende.model.Grupo;
 import org.enciende.model.GrupoUsuario;
 import org.enciende.model.Rally;
@@ -90,6 +91,11 @@ public class RallyBusinessImpl implements RallyBusiness {
 		grupoUsuario.setUsuario(usuario);
 		usuario.getGrupoUsuarios().add(grupoUsuario);
 		return grupoUsuario;
+	}
+	
+	@Override
+	public List<Actividad> findActividadesByIdGrupo(Integer grupoId) {
+		return dao.findActividadesByIdGrupo(grupoId);
 	}
 
 }
