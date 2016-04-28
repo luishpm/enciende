@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.enciende.business.RallyBusiness;
 import org.enciende.exception.BusinessException;
-import org.enciende.model.Actividad;
 import org.enciende.model.ActividadGrupo;
 import org.enciende.model.Grupo;
 import org.enciende.model.GrupoUsuario;
@@ -98,7 +97,7 @@ public class RallyBusinessImpl implements RallyBusiness {
 	}
 	
 	@Override
-	public List<Actividad> findActividadesByIdGrupo(Integer grupoId) {
+	public List<ActividadGrupo> findActividadesByIdGrupo(Integer grupoId) {
 		return dao.findActividadesByIdGrupo(grupoId);
 	}
 
