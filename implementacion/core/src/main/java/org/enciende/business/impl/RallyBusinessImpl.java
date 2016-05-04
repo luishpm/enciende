@@ -1,11 +1,15 @@
 package org.enciende.business.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.enciende.business.RallyBusiness;
 import org.enciende.exception.BusinessException;
 import org.enciende.model.Actividad;
+import org.enciende.model.ActividadGrupo;
 import org.enciende.model.Grupo;
 import org.enciende.model.GrupoUsuario;
 import org.enciende.model.Rally;
@@ -97,5 +101,56 @@ public class RallyBusinessImpl implements RallyBusiness {
 	public List<Actividad> findActividadesByIdGrupo(Integer grupoId) {
 		return dao.findActividadesByIdGrupo(grupoId);
 	}
+
+	@Override
+	public void cambiarEstatus(List<ActividadGrupo> actividades, String tokenStaff) {
+		if(actividades!=null && actividades.size()>0){
+			GrupoUsuario gUsuario = dao.findGrupoUsuarioByToken(actividades.get(0).getId().getIdGrupo(), tokenStaff);
+			
+			if(gUsuario!=null){
+				List<ActividadGrupo> actividadesBd = dao.findActividadesGrupoNoFinalizadas(gUsuario.getId().getGrupoIdGrupo());
+				Map<Integer, ActividadGrupo> actividadesMapa = new HashMap<Integer, ActividadGrupo>();
+				for(ActividadGrupo aGrupo : actividadesBd){
+					actividadesMapa.put(aGrupo.getId().getIdActividad(), aGrupo);
+				}
+				for(ActividadGrupo aGrupo : actividades){
+					if(gUsuario.getId().getGrupoIdGrupo().equals(aGrupo.getId().getIdGrupo())){
+						//Validamos que la actividad exista
+						ActividadGrupo aGrupoBd = actividadesMapa.get(aGrupo.getId().getIdActividad()); 
+						if(aGrupoBd!=null){
+							//Validamos que el estatus enviado sea mayor al estatus existente
+							if(aGrupo.getEstatus()>aGrupoBd.getEstatus()){
+								aGrupoBd.setEstatus(aGrupo.getEstatus());
+								
+								if(aGrupo.getEstatus()==10){
+									
+								}else if(aGrupo.getEstatus()==20){
+									
+								}else if(aGrupo.getEstatus()==30){
+									aGrupoBd.setHoraDesbloqueada(aGrupo.getHoraDesbloqueada()!=null?aGrupo.getHoraDesbloqueada():new Date());
+								}else if(aGrupo.getEstatus()==40){
+									
+								}else if(aGrupo.getEstatus()==100){
+									aGrupoBd.setHoraTerminada(aGrupo.getHoraTerminada()!=null?aGrupo.getHoraTerminada():new Date());
+									aGrupoBd.setCalificacion(aGrupo.getCalificacion());
+								}
+							}
+						}
+					}
+				}
+			}else{
+				throw new BusinessException("TokenStaff no válido", "R-A-101");
+			}
+		}
+		
+	}
+	/**
+	 * BLOQUEDA - 0
+	 * PISTA -10
+	 * COMO_LLEGAR - 20
+	 * DESBLOQUEADA - 30
+	 * SELFIE - 40
+	 * FINALIZADA - 100
+	 */
 
 }

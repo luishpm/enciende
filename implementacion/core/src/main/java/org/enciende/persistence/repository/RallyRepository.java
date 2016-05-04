@@ -3,7 +3,9 @@ package org.enciende.persistence.repository;
 import java.util.List;
 
 import org.enciende.model.Actividad;
+import org.enciende.model.ActividadGrupo;
 import org.enciende.model.Grupo;
+import org.enciende.model.GrupoUsuario;
 import org.enciende.model.GrupoUsuarioPK;
 import org.enciende.model.Rally;
 import org.springframework.data.jpa.repository.Modifying;
@@ -30,5 +32,10 @@ public interface RallyRepository extends PagingAndSortingRepository<Rally, Integ
 	
 	@Query("select ag.actividad from ActividadGrupo ag where ag.id.idGrupo =  ?1 order by ag.orden")
 	public List<Actividad> findActividadesByIdGrupo(Integer idGrupo);
-
+	
+	@Query("from GrupoUsuario gu where gu.id.grupoIdGrupo=?1 and gu.token=?2")
+	public GrupoUsuario findGrupoUsuarioByToken(Integer idGrupo, String tokenStaff);
+	
+	@Query("from ActividadGrupo ag where ag.estatus != 'FINALIZADA' and ag.id.grupoIdGrupo = ?1 ")
+	public List<ActividadGrupo> findActividadesGrupoNoFinalizadas(Integer idGrupo);
 }

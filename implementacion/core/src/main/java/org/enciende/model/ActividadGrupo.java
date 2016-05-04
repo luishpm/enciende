@@ -1,7 +1,15 @@
 package org.enciende.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 
 /**
@@ -19,15 +27,15 @@ public class ActividadGrupo implements Serializable {
 
 	private String calificacion;
 
-	private String estatus;
+	private Integer estatus;
 	
 	private Integer orden;
 
 	@Column(name="HORA_DESBLOQUEADA")
-	private String horaDesbloqueada;
+	private Date horaDesbloqueada;
 
 	@Column(name="HORA_TERMINADA")
-	private String horaTerminada;
+	private Date horaTerminada;
 
 	//bi-directional many-to-one association to Actividad
 	@ManyToOne
@@ -58,27 +66,27 @@ public class ActividadGrupo implements Serializable {
 		this.calificacion = calificacion;
 	}
 
-	public String getEstatus() {
+	public Integer getEstatus() {
 		return this.estatus;
 	}
 
-	public void setEstatus(String estatus) {
+	public void setEstatus(Integer estatus) {
 		this.estatus = estatus;
 	}
 
-	public String getHoraDesbloqueada() {
+	public Date getHoraDesbloqueada() {
 		return this.horaDesbloqueada;
 	}
 
-	public void setHoraDesbloqueada(String horaDesbloqueada) {
+	public void setHoraDesbloqueada(Date horaDesbloqueada) {
 		this.horaDesbloqueada = horaDesbloqueada;
 	}
 
-	public String getHoraTerminada() {
+	public Date getHoraTerminada() {
 		return this.horaTerminada;
 	}
 
-	public void setHoraTerminada(String horaTerminada) {
+	public void setHoraTerminada(Date horaTerminada) {
 		this.horaTerminada = horaTerminada;
 	}
 
