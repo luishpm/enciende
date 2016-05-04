@@ -35,6 +35,6 @@ public interface RallyRepository extends PagingAndSortingRepository<Rally, Integ
 	@Query("from GrupoUsuario gu where gu.id.grupoIdGrupo=?1 and gu.token=?2")
 	public GrupoUsuario findGrupoUsuarioByToken(Integer idGrupo, String tokenStaff);
 	
-	@Query("from ActividadGrupo ag where ag.estatus != 'FINALIZADA' and ag.id.grupoIdGrupo = ?1 ")
+	@Query("from ActividadGrupo ag where ag.estatus != 100 and ag.grupo.id = ?1 ")
 	public List<ActividadGrupo> findActividadesGrupoNoFinalizadas(Integer idGrupo);
 }

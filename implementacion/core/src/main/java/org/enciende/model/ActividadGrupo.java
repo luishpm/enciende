@@ -35,7 +35,7 @@ public class ActividadGrupo implements Serializable {
 	private Date horaDesbloqueada;
 	
 	@Column(name="HORA_INSTRUCCIONES")
-	private String horaInstrucciones;
+	private Date horaInstrucciones;
 
 	@Column(name="HORA_TERMINADA")
 	private Date horaTerminada;
@@ -85,11 +85,11 @@ public class ActividadGrupo implements Serializable {
 		this.horaDesbloqueada = horaDesbloqueada;
 	}
 	
-	public String getHoraInstrucciones() {
+	public Date getHoraInstrucciones() {
 		return this.horaInstrucciones;
 	}
 
-	public void setHoraInstrucciones(String horaInstrucciones) {
+	public void setHoraInstrucciones(Date horaInstrucciones) {
 		this.horaInstrucciones = horaInstrucciones;
 	}
 

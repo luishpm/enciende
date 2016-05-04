@@ -102,11 +102,12 @@ public class RallyBusinessImpl implements RallyBusiness {
 	}
 
 	@Override
-	public void cambiarEstatus(List<ActividadGrupo> actividades, String tokenStaff) {
+	@Transactional
+	public List<ActividadGrupo> cambiarEstatus(List<ActividadGrupo> actividades, String tokenStaff) {
 		if(actividades!=null && actividades.size()>0){
 			GrupoUsuario gUsuario = dao.findGrupoUsuarioByToken(actividades.get(0).getId().getIdGrupo(), tokenStaff);
 			
-			if(gUsuario!=null){
+			if(gUsuario!=null && !"PARTICIPANTE".equals(gUsuario.getRol())){
 				List<ActividadGrupo> actividadesBd = dao.findActividadesGrupoNoFinalizadas(gUsuario.getId().getGrupoIdGrupo());
 				Map<Integer, ActividadGrupo> actividadesMapa = new HashMap<Integer, ActividadGrupo>();
 				for(ActividadGrupo aGrupo : actividadesBd){
@@ -124,7 +125,7 @@ public class RallyBusinessImpl implements RallyBusiness {
 								if(aGrupo.getEstatus()==10){
 									
 								}else if(aGrupo.getEstatus()==20){
-									
+									aGrupoBd.setHoraInstrucciones(aGrupo.getHoraInstrucciones()!=null?aGrupo.getHoraInstrucciones():new Date());
 								}else if(aGrupo.getEstatus()==30){
 									aGrupoBd.setHoraDesbloqueada(aGrupo.getHoraDesbloqueada()!=null?aGrupo.getHoraDesbloqueada():new Date());
 								}else if(aGrupo.getEstatus()==40){
@@ -137,11 +138,12 @@ public class RallyBusinessImpl implements RallyBusiness {
 						}
 					}
 				}
+				return dao.findActividadesByIdGrupo(gUsuario.getId().getGrupoIdGrupo());
 			}else{
 				throw new BusinessException("TokenStaff no válido", "R-A-101");
 			}
 		}
-		
+		return null;
 	}
 	/**
 	 * BLOQUEDA - 0

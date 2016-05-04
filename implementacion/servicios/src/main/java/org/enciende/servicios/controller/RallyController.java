@@ -108,7 +108,7 @@ public class RallyController {
 			@RequestBody ActividadesEstatusForm form) {
 		Map<String,Object> respuesta = new HashMap<String,Object>();
 		try{
-			rallyBusiness.cambiarEstatus(form.getActividades(),form.getTokenStaff());
+			respuesta.put("actividades", rallyBusiness.cambiarEstatus(form.getActividades(),form.getTokenStaff()));
 			respuesta.put("success", true);
 		}catch(BusinessException e){
 			respuesta.put("success", false);
