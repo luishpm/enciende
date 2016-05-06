@@ -31,4 +31,9 @@ public class LocationBusinessImpl implements LocationBusiness {
 			}
 		}
 	}
+	
+	@Override
+	public List<LocationLog> getLocationsByGrupo(Integer idGrupo) {
+		return dao.findLocationsByGrupo(idGrupo);
+	}
 }

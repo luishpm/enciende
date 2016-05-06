@@ -15,6 +15,7 @@ import org.enciende.model.LocationLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LocationController {
 	@Autowired
 	private LocationBusiness locationBusiness;
+	
+	@ResponseBody
+	@RequestMapping(value = "/lista/{idGrupo}", method = RequestMethod.GET)
+	public Map<String,Object> getNoticias(HttpServletResponse response, Model model, HttpServletRequest request, 
+			@PathVariable("idGrupo") Integer idGrupo) {
+		Map<String,Object> respuesta = new HashMap<String,Object>();
+		respuesta.put("success", true);
+		respuesta.put("locations", locationBusiness.getLocationsByGrupo(idGrupo));
+		
+		return respuesta;
+		
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
