@@ -142,7 +142,5 @@ class ActividadesEstatusForm implements Serializable{
 	public void setTokenStaff(String tokenStaff) {
 		this.tokenStaff = tokenStaff;
 	}
-	
-	
 }
 

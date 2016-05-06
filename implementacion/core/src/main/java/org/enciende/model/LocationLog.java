@@ -15,9 +15,9 @@ import java.util.Date;
 public class LocationLog implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_LOCATION_LOG")
-	private int idLocationLog;
+	private Integer idLocationLog;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date hora;
@@ -42,11 +42,11 @@ public class LocationLog implements Serializable {
 	public LocationLog() {
 	}
 
-	public int getIdLocationLog() {
+	public Integer getIdLocationLog() {
 		return this.idLocationLog;
 	}
 
-	public void setIdLocationLog(int idLocationLog) {
+	public void setIdLocationLog(Integer idLocationLog) {
 		this.idLocationLog = idLocationLog;
 	}
 
@@ -97,5 +97,37 @@ public class LocationLog implements Serializable {
 	public void setGrupoUsuario(GrupoUsuario grupoUsuario) {
 		this.grupoUsuario = grupoUsuario;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idLocationLog == null) ? 0 : idLocationLog.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LocationLog other = (LocationLog) obj;
+		if (idLocationLog == null) {
+			if (other.idLocationLog != null)
+				return false;
+		} else if (!idLocationLog.equals(other.idLocationLog))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "LocationLog [idLocationLog=" + idLocationLog + ", latitud=" + latitud + ", longitud=" + longitud
+				+ ", precision=" + precision + ", grupoUsuario=" + grupoUsuario + "]";
+	}
+	
 
 }
