@@ -42,15 +42,19 @@ public class Rally implements Serializable {
 	@OneToMany(mappedBy="rally")
 	@JsonIgnore
 	private List<Noticia> noticias;
+	
+	//bi-directional many-to-one association to Contacto
+	@OneToMany(mappedBy="rally",fetch=FetchType.EAGER)
+	private List<Contacto> contactos;
 
 	public Rally() {
 	}
 
-	public int getIdRally() {
+	public Integer getIdRally() {
 		return this.idRally;
 	}
 
-	public void setIdRally(int idRally) {
+	public void setIdRally(Integer idRally) {
 		this.idRally = idRally;
 	}
 
@@ -129,5 +133,15 @@ public class Rally implements Serializable {
 
 		return noticia;
 	}
+
+	public List<Contacto> getContactos() {
+		return contactos;
+	}
+
+	public void setContactos(List<Contacto> contactos) {
+		this.contactos = contactos;
+	}
+	
+	
 
 }

@@ -11,6 +11,7 @@
 <class>org.enciende.model.Noticia</class>
 <class>org.enciende.model.Rally</class>
 <class>org.enciende.model.Usuario</class>
+<class>org.enciende.model.Contacto</class>
 		
 	</persistence-unit>
 </persistence>
