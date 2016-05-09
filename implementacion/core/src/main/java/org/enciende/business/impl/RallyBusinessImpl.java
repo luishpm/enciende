@@ -33,6 +33,11 @@ public class RallyBusinessImpl implements RallyBusiness {
 	}
 	
 	@Override
+	public List<GrupoUsuario> findAllStaffByRallyId(Integer rallyId) {
+		return dao.findAllStaffByRallyId(rallyId);
+	}
+	
+	@Override
 	public List<Rally> findAllRallys() {
 		return dao.findAllRallys();
 	}

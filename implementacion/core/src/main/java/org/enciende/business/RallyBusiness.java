@@ -10,6 +10,8 @@ import org.enciende.model.Usuario;
 
 public interface RallyBusiness {
 	public List<Grupo> findAllGruposByRallyId(Integer rallyId);
+	
+	public List<GrupoUsuario> findAllStaffByRallyId(Integer rallyId);
 
 	public List<Rally> findAllRallys();
 

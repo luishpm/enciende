@@ -16,6 +16,9 @@ public interface RallyRepository extends PagingAndSortingRepository<Rally, Integ
 	@Query("from Grupo g where g.rally.idRally = ?1 ")
 	public List<Grupo> findAllGruposByRallyId(Integer rallyId);
 	
+	@Query("from GrupoUsuario g where g.grupo.rally.idRally = ?1 and g.rol != 'PARTICIPANTE'")
+	public List<GrupoUsuario> findAllStaffByRallyId(Integer rallyId);
+	
 	@Query("from Rally")
 	public List<Rally> findAllRallys();
 	
