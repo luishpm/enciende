@@ -22,4 +22,6 @@ public interface RallyBusiness {
 	public List<ActividadGrupo> findActividadesByIdGrupo(Integer grupoId);
 	
 	public List<ActividadGrupo> cambiarEstatus(List<ActividadGrupo> actividades, String tokenStaff);
+
+	public List<ActividadGrupo> getUltimaActividadByGrupo(Integer idRally);
 }

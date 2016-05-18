@@ -25,6 +25,9 @@ public interface RallyRepository extends PagingAndSortingRepository<Rally, Integ
 	@Query("from Grupo g where g.nombre = ?1")
 	public List<Grupo> findGruposByNombre(String grupo);
 
+	@Query("from GrupoUsuario g where g.id.grupoIdGrupo = ?1 and g.id.usuarioIdUsuario = ?2")
+	public GrupoUsuario getGrupoUsuario(Integer grupoId, Integer usuarioId);
+	
 	@Query("from Grupo g where g.idGrupo = ?1")
 	public Grupo getGrupoById(Integer grupoId);
 	
@@ -40,4 +43,6 @@ public interface RallyRepository extends PagingAndSortingRepository<Rally, Integ
 	
 	@Query("from ActividadGrupo ag where ag.estatus != 100 and ag.grupo.id = ?1 ")
 	public List<ActividadGrupo> findActividadesGrupoNoFinalizadas(Integer idGrupo);
+	
+	
 }

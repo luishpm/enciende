@@ -41,6 +41,18 @@ public class RallyController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/{rallyId}/getUltimaActividadByGrupo", method = RequestMethod.GET)
+	public Map<String,Object> findAll(HttpServletResponse response, Model model, HttpServletRequest request,
+			@PathVariable("rallyId") Integer rallyId) {
+		Map<String,Object> respuesta = new HashMap<String,Object>();
+		respuesta.put("success", true);
+		respuesta.put("actividades", rallyBusiness.getUltimaActividadByGrupo(rallyId));
+		
+		return respuesta;
+		
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/{rallyId}/grupos", method = RequestMethod.GET)
 	public Map<String,Object> findAllGruposByRallyId(HttpServletResponse response, Model model, HttpServletRequest request, 
 			@PathVariable("rallyId") Integer rallyId) {

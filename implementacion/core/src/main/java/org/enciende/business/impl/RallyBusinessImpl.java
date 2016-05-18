@@ -42,6 +42,11 @@ public class RallyBusinessImpl implements RallyBusiness {
 		return dao.findAllRallys();
 	}
 	
+	@Override
+	public List<ActividadGrupo> getUltimaActividadByGrupo(Integer idRally){
+		return dao.getUltimaActividadByGrupo(idRally);
+	}
+	
 	@Transactional
 	@Override
 	public Grupo saveGrupo(Grupo grupo){
