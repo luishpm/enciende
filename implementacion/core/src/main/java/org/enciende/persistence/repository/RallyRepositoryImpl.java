@@ -27,8 +27,8 @@ public class RallyRepositoryImpl implements RallyRepositoryCustom {
 	@Override
 	public List<ActividadGrupo> getUltimaActividadByGrupo(Integer idRally) {
 		String queryStr = "select * from ACTIVIDAD_GRUPO where (id_grupo,orden) in "+
-				"(	select  id_grupo,max(orden) from actividad_grupo where estatus != 0  and id_grupo in "+
-				"(select ID_GRUPO from grupo where rally_id_rally= :idRally) "+
+				"(	select  id_grupo,max(orden) from ACTIVIDAD_GRUPO where estatus != 0  and id_grupo in "+
+				"(select ID_GRUPO from GRUPO where rally_id_rally= :idRally) "+
 			"group by ID_GRUPO "+
 		")";
 		Query query = em.createNativeQuery(queryStr, ActividadGrupo.class);
