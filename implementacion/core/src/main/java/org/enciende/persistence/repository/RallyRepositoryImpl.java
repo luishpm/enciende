@@ -26,7 +26,7 @@ public class RallyRepositoryImpl implements RallyRepositoryCustom {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ActividadGrupo> getUltimaActividadByGrupo(Integer idRally) {
-		String queryStr = "select * from actividad_grupo where (id_grupo,orden) in "+
+		String queryStr = "select * from ACTIVIDAD_GRUPO where (id_grupo,orden) in "+
 				"(	select  id_grupo,max(orden) from actividad_grupo where estatus != 0  and id_grupo in "+
 				"(select ID_GRUPO from grupo where rally_id_rally= :idRally) "+
 			"group by ID_GRUPO "+
