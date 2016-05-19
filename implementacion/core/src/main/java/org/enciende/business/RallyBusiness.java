@@ -16,6 +16,8 @@ public interface RallyBusiness {
 	public List<Rally> findAllRallys();
 
 	public Grupo saveGrupo(Grupo grupo);
+	
+	public Grupo getGrupo(Integer grupoId);
 
 	public GrupoUsuario inscribir(Usuario usuario);
 

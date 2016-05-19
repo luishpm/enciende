@@ -27,6 +27,8 @@ public class RallyBusinessImpl implements RallyBusiness {
 	@Autowired
 	private UsuarioRepository daoUsuario;
 
+	
+	
 	@Override
 	public List<Grupo> findAllGruposByRallyId(Integer rallyId) {
 		return dao.findAllGruposByRallyId(rallyId);
@@ -163,5 +165,10 @@ public class RallyBusinessImpl implements RallyBusiness {
 	 * SELFIE - 40
 	 * FINALIZADA - 100
 	 */
+
+	@Override
+	public Grupo getGrupo(Integer grupoId) {
+		return dao.getGrupoById(grupoId);
+	}
 
 }
