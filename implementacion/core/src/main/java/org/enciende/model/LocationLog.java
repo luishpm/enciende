@@ -2,6 +2,9 @@ package org.enciende.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -33,6 +36,7 @@ public class LocationLog implements Serializable {
 
 	//bi-directional many-to-one association to GrupoUsuario
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumns({
 		@JoinColumn(name="ID_GRUPO", referencedColumnName="GRUPO_ID_GRUPO"),
 		@JoinColumn(name="ID_USUARIO", referencedColumnName="USUARIO_ID_USUARIO")
