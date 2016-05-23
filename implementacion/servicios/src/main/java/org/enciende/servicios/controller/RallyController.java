@@ -149,6 +149,11 @@ public class RallyController {
 			respuesta.put("success", false);
 			respuesta.put("errorMessage", e.getMessage());
 			respuesta.put("errorCode", e.getStatus());
+			try{
+				respuesta.put("actividades", rallyBusiness.findActividadesByIdGrupo(form.getActividades().get(0).getId().getIdGrupo()));
+			}catch(Exception ex){
+				e.printStackTrace();
+			}
 		}
 		
 		
