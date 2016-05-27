@@ -1,11 +1,22 @@
 package org.enciende.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.Date;
 
 
 /**
@@ -32,7 +43,7 @@ public class LocationLog implements Serializable {
 	private String longitud;
 
 	@Column(name="`PRECISION`")
-	private Double precision;
+	private String precision;
 
 	//bi-directional many-to-one association to GrupoUsuario
 	@ManyToOne
@@ -86,11 +97,11 @@ public class LocationLog implements Serializable {
 		this.longitud = longitud;
 	}
 
-	public Double getPrecision() {
+	public String getPrecision() {
 		return this.precision;
 	}
 
-	public void setPrecision(Double precision) {
+	public void setPrecision(String precision) {
 		this.precision = precision;
 	}
 
