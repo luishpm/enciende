@@ -28,12 +28,12 @@ public class LocationController {
 	private LocationBusiness locationBusiness;
 	
 	@ResponseBody
-	@RequestMapping(value = "/lista/{idGrupo}", method = RequestMethod.GET)
+	@RequestMapping(value = "/lista/{idGrupo}/{precision}", method = RequestMethod.GET)
 	public Map<String,Object> getNoticias(HttpServletResponse response, Model model, HttpServletRequest request, 
-			@PathVariable("idGrupo") Integer idGrupo) {
+			@PathVariable("idGrupo") Integer idGrupo,@PathVariable("precision") double precision) {
 		Map<String,Object> respuesta = new HashMap<String,Object>();
 		respuesta.put("success", true);
-		respuesta.put("locations", locationBusiness.getLocationsByGrupo(idGrupo));
+		respuesta.put("locations", locationBusiness.getLocationsByGrupo(idGrupo,precision));
 		
 		return respuesta;
 		

@@ -24,7 +24,7 @@ public class LocationBusinessImpl implements LocationBusiness {
 			
 			for(LocationLog location : locations){
 				if(StringUtils.isNotBlank(location.getLatitud()) && StringUtils.isNotBlank(location.getLongitud()) 
-						&& StringUtils.isNotBlank(location.getPrecision())){
+						&& location.getPrecision()!=null){
 					location.setGrupoUsuario(gu);
 					dao.save(location);
 				}
@@ -33,7 +33,7 @@ public class LocationBusinessImpl implements LocationBusiness {
 	}
 	
 	@Override
-	public List<LocationLog> getLocationsByGrupo(Integer idGrupo) {
-		return dao.findLocationsByGrupo(idGrupo);
+	public List<LocationLog> getLocationsByGrupo(Integer idGrupo, double precision) {
+		return dao.findLocationsByGrupo(idGrupo,precision);
 	}
 }

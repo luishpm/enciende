@@ -32,7 +32,7 @@ public class LocationLog implements Serializable {
 	private String longitud;
 
 	@Column(name="`PRECISION`")
-	private String precision;
+	private Double precision;
 
 	//bi-directional many-to-one association to GrupoUsuario
 	@ManyToOne
@@ -86,11 +86,11 @@ public class LocationLog implements Serializable {
 		this.longitud = longitud;
 	}
 
-	public String getPrecision() {
+	public Double getPrecision() {
 		return this.precision;
 	}
 
-	public void setPrecision(String precision) {
+	public void setPrecision(Double precision) {
 		this.precision = precision;
 	}
 
