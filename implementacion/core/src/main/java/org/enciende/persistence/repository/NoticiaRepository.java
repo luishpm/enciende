@@ -12,7 +12,7 @@ public interface NoticiaRepository extends PagingAndSortingRepository<Noticia, I
 	@Query("from Noticia ")
 	public List<Noticia> findAllNoticias();
 	
-	@Query("from Noticia n where n.idNoticia = ?1 order by n.fechaNoticia desc")
+	@Query("from Noticia n where n.idNoticia = ?1 ")
 	public Noticia findNoticia(Long noticiaId);
 	
 	
