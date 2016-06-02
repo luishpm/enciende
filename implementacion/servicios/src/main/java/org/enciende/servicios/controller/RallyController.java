@@ -1,13 +1,21 @@
 package org.enciende.servicios.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.enciende.business.RallyBusiness;
 import org.enciende.exception.BusinessException;
 import org.enciende.model.ActividadGrupo;
@@ -22,12 +30,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/rally")
 public class RallyController {
 	@Autowired
 	private RallyBusiness rallyBusiness;
+	
+	@Autowired
+    ServletContext context; 
 	
 	@ResponseBody
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
@@ -156,6 +169,41 @@ public class RallyController {
 			}
 		}
 		
+		
+		return respuesta;
+	}
+	
+	@RequestMapping(value = "/subir-selfie", method = RequestMethod.POST)
+	public @ResponseBody Map<String,Object> subirIdentificacion(MultipartHttpServletRequest request) {
+		Map<String,Object> respuesta = new HashMap<String,Object>();
+		String token = request.getParameter("token");
+		String grupoId = request.getParameter("idGrupo");
+		String actividadId = request.getParameter("idActividad");
+		context.getRealPath("");
+		
+		if("ki$59%38IO#".equals(token)){
+			MultipartFile mpf = null;
+			Iterator<String> itr = request.getFileNames();
+			
+			while (itr.hasNext()) {
+				mpf = request.getFile(itr.next());
+				OutputStream output = null;
+				
+				try {
+					File file = new File(context.getRealPath("")+"/../imagenes/selfies/"+grupoId);
+					file.mkdirs();
+					output = new FileOutputStream(context.getRealPath("")+"/../imagenes/selfies/"+grupoId+"/"+actividadId+".jpg");
+					IOUtils.copy(mpf.getInputStream(), output);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}finally{
+					try {mpf.getInputStream().close();} catch (IOException e) {e.printStackTrace();}
+					try {output.close();} catch (IOException e) {e.printStackTrace();}
+				}
+			}
+		}
 		
 		return respuesta;
 	}
