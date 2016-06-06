@@ -23,6 +23,9 @@ public class GrupoUsuario implements Serializable {
 	private String rol;
 
 	private String token;
+	
+	@Column(name="REPORTAR_UBICACION")
+	private Boolean reportarUbiacion;
 
 	//bi-directional many-to-one association to Grupo
 	@JoinColumn(insertable=false, updatable=false)
@@ -76,6 +79,16 @@ public class GrupoUsuario implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	
+
+	public Boolean getReportarUbiacion() {
+		return reportarUbiacion;
+	}
+
+	public void setReportarUbiacion(Boolean reportarUbiacion) {
+		this.reportarUbiacion = reportarUbiacion;
 	}
 
 	@Override

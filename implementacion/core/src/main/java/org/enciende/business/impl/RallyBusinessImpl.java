@@ -15,6 +15,7 @@ import org.enciende.model.Rally;
 import org.enciende.model.Usuario;
 import org.enciende.persistence.repository.RallyRepository;
 import org.enciende.persistence.repository.UsuarioRepository;
+import org.enciende.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +27,9 @@ public class RallyBusinessImpl implements RallyBusiness {
 	
 	@Autowired
 	private UsuarioRepository daoUsuario;
+	
+	@Autowired
+	private EmailService emailService;
 
 	
 	
@@ -97,15 +101,49 @@ public class RallyBusinessImpl implements RallyBusiness {
 			usuario = daoUsuario.save(usuario);
 			usuario.setGrupoUsuarios(new ArrayList<GrupoUsuario>());
 			
-			grupoUsuario.setToken(usuario.getIdUsuario()+""+grupoUsuario.getId().getGrupoIdGrupo());
+			String token = Integer.toHexString(Integer.parseInt(usuario.getIdUsuario()+""+grupoUsuario.getId().getGrupoIdGrupo()));
+			token += getRandomString(2);
+			
+			grupoUsuario.setToken(token.toUpperCase());
+			grupoUsuario.setReportarUbiacion(true);;
 			grupoUsuario.getId().setUsuarioIdUsuario(usuario.getIdUsuario());
 			daoUsuario.saveGrupoUsuario(grupoUsuario);
 			grupoUsuario.setGrupo(dao.getGrupoById(grupoUsuario.getId().getGrupoIdGrupo()));
+			
+			emailService.sendEmail(usuario.getEmail(), "Bienvenido al rally enciende 2016, te inivitamos a bajar nuestra app para que mantengas informado."
+					+ " Tu código de registro es: "+token.toUpperCase(), "Bienvenido a rally enciende 2016");
 		}
 		
 		grupoUsuario.setUsuario(usuario);
 		usuario.getGrupoUsuarios().add(grupoUsuario);
 		return grupoUsuario;
+	}
+	
+	/**
+	 * generador de palabras aleatorias de n caracteres
+	 * 
+	 * @return
+	 */
+	public static String getRandomString(int n) {
+		char[] pw = new char[n];
+		int c = 'A';
+		int r1 = 0;
+		for (int i = 0; i < n; i++) {
+			r1 = (int) (Math.random() * 3);
+			switch (r1) {
+			case 0:
+				c = '0' + (int) (Math.random() * 10);
+				break;
+			case 1:
+				c = 'a' + (int) (Math.random() * 26);
+				break;
+			case 2:
+				c = 'A' + (int) (Math.random() * 26);
+				break;
+			}
+			pw[i] = (char) c;
+		}
+		return new String(pw);
 	}
 	
 	@Override
