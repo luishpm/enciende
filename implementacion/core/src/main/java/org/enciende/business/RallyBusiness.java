@@ -12,7 +12,7 @@ import org.enciende.model.Usuario;
 public interface RallyBusiness {
 	public List<Grupo> findAllGruposByRallyId(Integer rallyId);
 	
-	public List<GrupoUsuario> findAllUsuariosByGrupoAndRallyId(Integer rallyId, Integer grupoId, String token) throws BusinessException;
+	public List<Usuario> findAllUsuariosByGrupoAndRallyId(Integer rallyId, Integer grupoId, String token) throws BusinessException;
 	
 	public List<GrupoUsuario> findAllStaffByRallyId(Integer rallyId);
 

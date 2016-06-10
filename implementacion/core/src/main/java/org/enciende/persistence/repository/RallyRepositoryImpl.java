@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.enciende.model.ActividadGrupo;
 import org.enciende.model.Grupo;
+import org.enciende.model.Usuario;
 
 public class RallyRepositoryImpl implements RallyRepositoryCustom {
 	@PersistenceContext
@@ -36,6 +37,17 @@ public class RallyRepositoryImpl implements RallyRepositoryCustom {
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Usuario> findAllUsuariosByGrupoAndRallyId(Integer idRally, Integer idGrupo) {
+		String queryStr = "SELECT * FROM USUARIO WHERE ID_USUARIO IN " + 
+					"(SELECT gu.USUARIO_ID_USUARIO FROM GRUPO_USUARIO gu WHERE gu.GRUPO_ID_GRUPO= :idGrupo AND GRUPO_ID_GRUPO IN " + 
+				"(SELECT ID_GRUPO FROM GRUPO WHERE RALLY_ID_RALLY= :idRally ));";
+		Query query = em.createNativeQuery(queryStr, Usuario.class);
+		query.setParameter("idRally", idRally);
+		query.setParameter("idGrupo", idGrupo);
+		return query.getResultList();
+	}
 	
 
 }

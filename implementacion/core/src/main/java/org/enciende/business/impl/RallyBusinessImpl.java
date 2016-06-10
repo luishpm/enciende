@@ -39,7 +39,7 @@ public class RallyBusinessImpl implements RallyBusiness {
 	}
 	
 	@Override
-	public List<GrupoUsuario> findAllUsuariosByGrupoAndRallyId(Integer rallyId, Integer grupoId, String token) throws BusinessException {
+	public List<Usuario> findAllUsuariosByGrupoAndRallyId(Integer rallyId, Integer grupoId, String token) throws BusinessException {
 		GrupoUsuario gUsuarioStaff = dao.findGrupoUsuarioByToken(token);
 		
 		if("ki$59%38IO#".equals(token) || (gUsuarioStaff!=null && !"PARTICIPANTE".equals(gUsuarioStaff.getRol()))){
