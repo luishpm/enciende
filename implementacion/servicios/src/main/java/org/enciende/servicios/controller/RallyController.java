@@ -79,6 +79,24 @@ public class RallyController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/{rallyId}/grupos/{grupoId}/integrantes/{token}", method = RequestMethod.GET)
+	public Map<String,Object> findAllUsuariosByGrupoAndRallyId(HttpServletResponse response, Model model, HttpServletRequest request, 
+			@PathVariable("rallyId") Integer rallyId, @PathVariable("grupoId") Integer grupoId, @PathVariable("token") String token) {
+		Map<String,Object> respuesta = new HashMap<String,Object>();
+		respuesta.put("success", true);
+		try {
+			respuesta.put("grupos", rallyBusiness.findAllUsuariosByGrupoAndRallyId(rallyId, grupoId, token));
+		} catch (BusinessException e) {
+			respuesta.put("success", false);
+			respuesta.put("errorMessage", e.getMessage());
+			respuesta.put("errorCode", e.getStatus());
+		}
+		
+		return respuesta;
+		
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/grupo/{grupoId}", method = RequestMethod.GET)
 	public Map<String,Object> getGrupo(HttpServletResponse response, Model model, HttpServletRequest request, 
 			@PathVariable("grupoId") Integer grupoId) {
