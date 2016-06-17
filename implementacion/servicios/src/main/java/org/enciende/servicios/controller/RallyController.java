@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.enciende.business.RallyBusiness;
 import org.enciende.exception.BusinessException;
 import org.enciende.model.ActividadGrupo;
@@ -190,9 +191,15 @@ public class RallyController {
 				OutputStream output = null;
 				
 				try {
-					File file = new File(context.getRealPath("")+"/../imagenes/selfies/"+grupoId);
+					String path = context.getRealPath("")+"/../imagenes";
+					
+					if(StringUtils.isNotBlank(System.getenv("OPENSHIFT_DATA_DIR"))){
+						path = System.getenv("OPENSHIFT_DATA_DIR");
+					}
+					
+					File file = new File(path+"/selfies/"+grupoId);
 					file.mkdirs();
-					output = new FileOutputStream(context.getRealPath("")+"/../imagenes/selfies/"+grupoId+"/"+actividadId+".jpg");
+					output = new FileOutputStream(path+"/selfies/"+grupoId+"/"+actividadId+".jpg");
 					IOUtils.copy(mpf.getInputStream(), output);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
