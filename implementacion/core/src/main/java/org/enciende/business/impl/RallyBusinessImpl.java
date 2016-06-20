@@ -219,5 +219,26 @@ public class RallyBusinessImpl implements RallyBusiness {
 	public Grupo getGrupo(Integer grupoId) {
 		return dao.getGrupoById(grupoId);
 	}
+	
+	@Override
+	public List<Map<String, String>> getTopicsByRally(Integer idRally) {
+		String topicPrefix = "/topics/equipo_";
+		
+		List<Map<String, String>> topics = new ArrayList<>();
+		List<Grupo> grupos = dao.findAllGruposByRallyId(idRally);
+		
+		Map<String, String> topic = new HashMap<String, String>();
+		topic.put("descripcion", "Rally " + idRally + ": " + grupos.get(0).getRally().getNombre());
+		topic.put("nombre", "/topics/rally_" + idRally);
+		topics.add(topic);
+
+		for(Grupo grupo : grupos) {
+			topic = new HashMap<String, String>();
+			topic.put("descripcion", "Equipo " + grupo.getNombre());
+			topic.put("nombre", topicPrefix + grupo.getIdGrupo());
+			topics.add(topic);
+		}
+		return topics;
+	}
 
 }

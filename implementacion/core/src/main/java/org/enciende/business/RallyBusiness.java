@@ -1,6 +1,7 @@
 package org.enciende.business;
 
 import java.util.List;
+import java.util.Map;
 
 import org.enciende.exception.BusinessException;
 import org.enciende.model.ActividadGrupo;
@@ -29,4 +30,6 @@ public interface RallyBusiness {
 	public List<ActividadGrupo> cambiarEstatus(List<ActividadGrupo> actividades, String tokenStaff);
 
 	public List<ActividadGrupo> getUltimaActividadByGrupo(Integer idRally);
+	
+	public List<Map<String, String>> getTopicsByRally(Integer idRally);
 }

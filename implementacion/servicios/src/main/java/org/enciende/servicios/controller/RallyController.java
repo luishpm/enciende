@@ -169,6 +169,22 @@ public class RallyController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/topics/{idRally}", method = RequestMethod.GET)
+	public Map<String,Object> getRallyTopics(HttpServletResponse response, Model model, HttpServletRequest request, 
+			@PathVariable("idRally") Integer idRally) {
+		Map<String,Object> respuesta = new HashMap<String,Object>();
+		try{
+			respuesta.put("topics", rallyBusiness.getTopicsByRally(idRally));
+			respuesta.put("success", true);
+		}catch(BusinessException e){
+			respuesta.put("success", false);
+			respuesta.put("errorMessage", e.getMessage());
+			respuesta.put("errorCode", e.getStatus());
+		}
+		return respuesta;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/actividad/cambiar-estatus", method = RequestMethod.POST)
 	public Map<String,Object> cambiarEstatus(HttpServletResponse response, Model model, HttpServletRequest request, 
 			@RequestBody ActividadesEstatusForm form) {
