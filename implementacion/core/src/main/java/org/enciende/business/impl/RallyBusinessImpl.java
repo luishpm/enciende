@@ -227,16 +227,18 @@ public class RallyBusinessImpl implements RallyBusiness {
 		List<Map<String, String>> topics = new ArrayList<>();
 		List<Grupo> grupos = dao.findAllGruposByRallyId(idRally);
 		
-		Map<String, String> topic = new HashMap<String, String>();
-		topic.put("descripcion", "Rally " + idRally + ": " + grupos.get(0).getRally().getNombre());
-		topic.put("nombre", "/topics/rally_" + idRally);
-		topics.add(topic);
-
-		for(Grupo grupo : grupos) {
-			topic = new HashMap<String, String>();
-			topic.put("descripcion", "Equipo " + grupo.getNombre());
-			topic.put("nombre", topicPrefix + grupo.getIdGrupo());
+		if(grupos.size() > 0) {
+			Map<String, String> topic = new HashMap<String, String>();
+			topic.put("descripcion", "Rally " + idRally + ": " + grupos.get(0).getRally().getNombre());
+			topic.put("nombre", "/topics/rally_" + idRally);
 			topics.add(topic);
+	
+			for(Grupo grupo : grupos) {
+				topic = new HashMap<String, String>();
+				topic.put("descripcion", "Equipo " + grupo.getNombre());
+				topic.put("nombre", topicPrefix + grupo.getIdGrupo());
+				topics.add(topic);
+			}
 		}
 		return topics;
 	}
