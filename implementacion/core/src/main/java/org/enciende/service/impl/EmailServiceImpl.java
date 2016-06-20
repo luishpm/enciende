@@ -39,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
             postParameters.add(new BasicNameValuePair("to", to));
             postParameters.add(new BasicNameValuePair("subject", subject));
             postParameters.add(new BasicNameValuePair("text", message));
-            request.setEntity(new UrlEncodedFormEntity(postParameters));
+            request.setEntity(new UrlEncodedFormEntity(postParameters,"utf-8"));
             
 			CloseableHttpResponse response = httpclient.execute(request);
 			getMapResponse(response);
@@ -56,7 +56,7 @@ public class EmailServiceImpl implements EmailService {
 	}
 	
 	public static void main(String[] args) {
-		new EmailServiceImpl().sendEmail("luishpm@gmail.com", "Bienvenido al rally", "Bienvenido");
+		new EmailServiceImpl().sendEmail("luishpm@gmail.com", "Bienvenido al rally á?", "Bienvenido");
 	}
 	
 	private static Map<String, String> getMapResponse(CloseableHttpResponse response) throws IOException {
