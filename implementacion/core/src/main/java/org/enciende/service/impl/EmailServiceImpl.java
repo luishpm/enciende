@@ -38,7 +38,7 @@ public class EmailServiceImpl implements EmailService {
             postParameters.add(new BasicNameValuePair("from", "Contacto enciende <hola@enciende.org>"));
             postParameters.add(new BasicNameValuePair("to", to));
             postParameters.add(new BasicNameValuePair("subject", subject));
-            postParameters.add(new BasicNameValuePair("text", message));
+            postParameters.add(new BasicNameValuePair("html", message));
             request.setEntity(new UrlEncodedFormEntity(postParameters,"utf-8"));
             
 			CloseableHttpResponse response = httpclient.execute(request);
