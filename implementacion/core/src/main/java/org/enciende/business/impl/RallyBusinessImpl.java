@@ -16,7 +16,6 @@ import org.enciende.model.Usuario;
 import org.enciende.persistence.repository.RallyRepository;
 import org.enciende.persistence.repository.UsuarioRepository;
 import org.enciende.service.EmailService;
-import org.enciende.service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +30,6 @@ public class RallyBusinessImpl implements RallyBusiness {
 	
 	@Autowired
 	private EmailService emailService;
-
-	public static void main(String[] args) {
-		EmailService emailService = new EmailServiceImpl();
-		emailService.sendEmail("rbnquintero@gmail.com", getMessageToContact("ABC123"), "Bienvenido a rally enciende 2016");
-	}
 	
 	@Override
 	public List<Grupo> findAllGruposByRallyId(Integer rallyId) {
@@ -246,7 +240,7 @@ public class RallyBusinessImpl implements RallyBusiness {
 		return topics;
 	}
 	
-	private static String getMessageToContact(String code){
+	private String getMessageToContact(String code){
 		StringBuffer html = new StringBuffer();
 		html.append("<!DOCTYPE html>");
 		html.append("<html>");
